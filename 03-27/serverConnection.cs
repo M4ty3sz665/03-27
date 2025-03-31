@@ -17,16 +17,16 @@ namespace _03_27
             this.serverurl = serverurl;
         }
 
-        public async Task<List<string>> getKolbasz()
+        public async Task<List<JsonData>> getKolbasz()
         {
             string url = serverurl + "/kolbaszok";
-            List<string> all = new List<string>();
+            List<JsonData> all = new List<JsonData>();
             try
             {
                 HttpResponseMessage response = await client.GetAsync(url);
                 response.EnsureSuccessStatusCode();
                 string result = await response.Content.ReadAsStringAsync();
-                all = JsonConvert.DeserializeObject<List<string>>(result);
+                all = JsonConvert.DeserializeObject<List<JsonData>>(result);
 
             }
             catch (Exception e)
@@ -63,10 +63,10 @@ namespace _03_27
             return false;
         }
 
-        public async Task<List<string>> deleteKolbasz()
+        public async Task<List<string>> deleteKolbasz(int id)
         {
             List<string> all = new List<string>();
-            string url = serverurl + "/deleteKolbasz";
+            string url = serverurl + "/deleteKolbasz/"+ id;
             try
             {
                 HttpResponseMessage response = await client.GetAsync(url);

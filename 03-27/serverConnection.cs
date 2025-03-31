@@ -63,22 +63,24 @@ namespace _03_27
             return false;
         }
 
-        public async Task<List<string>> deleteKolbasz(int id)
+        public async Task<bool> deleteKolbasz(int id)
         {
-            List<string> all = new List<string>();
+            
             string url = serverurl + "/deleteKolbasz/"+ id;
             try
             {
-                HttpResponseMessage response = await client.GetAsync(url);
+                HttpResponseMessage response = await client.DeleteAsync(url);
                 response.EnsureSuccessStatusCode();
                 string result = await response.Content.ReadAsStringAsync();
-                all = JsonConvert.DeserializeObject<List<JsonData>>(result).Select(item => item.kolbaszName).ToList();
+                JsonData data = JsonConvert.DeserializeObject<JsonData>(result);
+
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
-            return all;
+            return false;
         }
 
     }

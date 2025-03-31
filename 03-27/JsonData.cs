@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _03_27
 {
-    class JsonData
+    public class JsonData
     {
         public int id { get; set; }
         public string kolbaszName { get; set; }
